@@ -13,7 +13,7 @@ This is a simple CGPA calculator designed specifically for Chandigarh University
 
 ## How to Use
 
-1. **Clone the repository:** `git clone https://github.com/your-username/cu-cgpa-calculator.git`
+1. **Clone the repository:** `[git clone https://github.com/your-username/cu-cgpa-calculator.git](https://github.com/anuraggaur29/CGPA-Calculator.git)`
 2. **Open `index.html` in your browser.**
 3. **Enter the grade and credits for each subject.**
 4. **Click "Add Subject" to add more subjects.**
