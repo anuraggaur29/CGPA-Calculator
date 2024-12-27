@@ -1,0 +1,154 @@
+@media (max-width: 768px) {
+    .container {
+      max-width: 90%; 
+    }
+    h1 {
+      font-size: 2em;
+    }
+    button {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 15px;
+    }
+    h1 {
+      font-size: 1.5em;
+    }
+    .subject {
+      flex-direction: column; 
+      align-items: flex-start;
+    }
+    label {
+      text-align: left; 
+    }
+    button {
+      font-size: 14px;
+      width: 100%;
+    }
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #F44336, #FF9800, #FFEB3B, #4CAF50, #2196F3, #3F51B5, #9C27B0);
+    background-size: 200% 200%;
+    animation: gradient-animation 5s ease infinite;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333; 
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.love-message {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Roboto', sans-serif; /* Use Roboto font */
+    font-size: 14px;
+    /* Apply rainbow color using gradient */
+    background: -webkit-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: right;
+  }
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    overflow-y: auto; 
+    max-height: 90vh; 
+}
+
+h1 {
+    text-align: center;
+    background: -webkit-linear-gradient(#F44336, #9C27B0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.subject {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    flex: 1;
+    min-width: 100px;
+    font-weight: bold;
+    color: #3F51B5;
+    text-align: right; 
+}
+
+select, input {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #2196F3;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #9C27B0;
+    box-shadow: 0 0 5px #9C27B0;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #969bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #673AB7; 
+}
+
+#calc-cgpa { 
+    background-color: #4CAF50; 
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.remove-subject {
+  background-color: #f44336;
+  margin-left: 10px;
+}
