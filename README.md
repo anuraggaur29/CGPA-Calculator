@@ -1,5 +1,5 @@
 # CU CGPA Calculator
-
+https://cu-sgpa-calculator.netlify.app/
 This is a simple CGPA calculator designed specifically for Chandigarh University (CU) students. It allows students to quickly and easily calculate their CGPA based on their grades and credit hours.
 
 ## Features
