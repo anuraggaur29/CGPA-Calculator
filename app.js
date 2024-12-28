@@ -1,3 +1,6 @@
+const currentYearSpan = document.getElementById('currentYear');
+const currentYear = new Date().getFullYear(); 
+currentYearSpan.textContent = currentYear;
 let subjectCount = 1; 
 
         function addSubject() {
