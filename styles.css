@@ -154,32 +154,6 @@ button:hover {
   }
 }
 
-/* Snowfall effect */
-.snowflake {
-  position: absolute;
-  width: 3px; /* Smaller size */
-  height: 3px;
-  background-color: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: snowfall 5s linear infinite; /* Faster speed */
-}
-
-.snowflake:nth-child(1) { left: 10%; animation-delay: 0s; }
-.snowflake:nth-child(2) { left: 20%; animation-delay: 0.5s; }
-.snowflake:nth-child(3) { left: 30%; animation-delay: 1s; }
-.snowflake:nth-child(4) { left: 40%; animation-delay: 1.5s; }
-.snowflake:nth-child(5) { left: 50%; animation-delay: 2s; }
-
-@keyframes snowfall {
-  0% {
-    transform: translate(0, -100vh);
-  }
-  100% {
-    transform: translate(100vw, 100vh); /* Move diagonally to bottom right */
-  }
-}
-
 footer {
   position: fixed;
   bottom: 0;
