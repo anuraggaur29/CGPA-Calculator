@@ -73,7 +73,7 @@ let subjectCount = 1;
             }
           
             const cgpa = totalGradePoints / totalCredits;
-            document.getElementById('result').textContent = `Your CGPA is: ${cgpa}`;
+            document.getElementById('result').textContent = `Your CGPA is: ${cgpa.toFixed(2)}`;
           }
 
         document.getElementById('add-subject').addEventListener('click', addSubject);
