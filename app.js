@@ -82,9 +82,3 @@ document.getElementById('cgpa-form').addEventListener('submit', function(event) 
 const currentYearSpan = document.getElementById('currentYear');
 const currentYear = new Date().getFullYear();
 currentYearSpan.textContent = currentYear;
-
-for (let i = 0; i < 50; i++) {
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  document.body.appendChild(snowflake);
-}
