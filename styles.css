@@ -157,12 +157,12 @@ button:hover {
 /* Snowfall effect */
 .snowflake {
   position: absolute;
-  width: 3.5px; /* Smaller size */
+  width: 3px; /* Smaller size */
   height: 3px;
   background-color: white;
   border-radius: 50%;
   opacity: 0.8;
-  animation: snowfall 3s linear infinite; /* Faster speed */
+  animation: snowfall 5s linear infinite; /* Faster speed */
 }
 
 .snowflake:nth-child(1) { left: 10%; animation-delay: 0s; }
