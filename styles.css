@@ -10,7 +10,6 @@ body {
   align-items: center;
   height: 100vh;
   color: #333;
-  overflow: hidden; /* Hide scrollbars for snowfall effect */
 }
 
 @keyframes gradient-animation {
@@ -152,16 +151,4 @@ button:hover {
     font-size: 14px;
     width: 100%;
   }
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 14px;
 }
