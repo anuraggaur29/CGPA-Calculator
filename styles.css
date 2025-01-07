@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #F44336, #FF9800, #FFEB3B, #4CAF50, #2196F3, #3F51B5, #9C27B0);
+  background: linear-gradient( #E1A140, #532200, #EFCFA0, #914110);
   background-size: 200% 200%;
-  animation: gradient-animation 5s ease infinite;
+  /* animation: gradient-animation 5s ease infinite; */
   margin: 0;
   padding: 0;
   display: flex;
@@ -12,11 +12,12 @@ body {
   color: #333;
 }
 
-@keyframes gradient-animation {
+/* @keyframes gradient-animation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
+} */
+
 
 .love-message {
   position: absolute;
@@ -24,10 +25,10 @@ body {
   right: 10px;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  background: -webkit-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet);
+  background: -webkit-linear-gradient(#E1A140, #532200, #EFCFA0, #914110);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   text-align: right;
 }
 
