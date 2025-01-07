@@ -26,6 +26,6 @@ Contributions are welcome! If you find any bugs or have suggestions for improvem
 
 ## Acknowledgements
 
-* Made with ❤️ by Anurag Shakalya
+* Made with ❤️ by Anurag
 * Built with HTML, CSS, and JavaScript.
 * Inspired by the need for a simple and accessible CGPA calculator for CU students.
