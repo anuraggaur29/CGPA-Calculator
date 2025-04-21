@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CU CGPA Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CU SGPA Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.eduopinions.com/wp-content/uploads/2018/03/Chandigarh-University-CU-logo-350x556.jpg" type="image/png">
+
+  <!-- FontAwesome CDN for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+  <div id="info-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <h2>Welcome to CU SGPA Calculator!</h2>
+      <p>This tool helps you calculate your SGPA based on your grades and credits.</p>
+      <p><strong>How it works:</strong> Choose the grade and enter the credits for each subject. Press 'Calculate SGPA' when you're ready.</p>
+      <p><strong>Features:</strong></p>
+      <ul class="features-list">
+        <li>Add multiple subjects</li>
+        <li>Remove subjects dynamically</li>
+        <li>Calculate SGPA instantly</li>
+      </ul>
+      <p class="madewithlove">Made with ❤️ <br>Contact: anuragshakalya@gmail.com</p>
+    </div>
+  </div>
+  
   <div class="container">
-    <h1><img src="https://www.eduopinions.com/wp-content/uploads/2018/03/Chandigarh-University-CU-logo-350x556.jpg" style="height: 2.5rem;" alt="">CGPA Calculator</h1>
-    <form id="cgpa-form">
-      <div id="subjects-container">
-        <div class="subject">
-          <label for="grade1">Subject 1 Grade:</label> 
-          <select id="grade1" class="grade" required>
-            <option value="10">A+</option>
-            <option value="9">A</option>
-            <option value="8">B+</option>
-            <option value="7">B</option>
-            <option value="6">C+</option>
-            <option value="5">C</option>
-            <option value="4">D</option>
-          </select>
-          <label for="credit1">Credits:</label>
-          <input type="number" id="credit1" class="credit" step="1" min="1" required placeholder="enter credit value here">
-          <button type="button" class="remove-subject">Remove</button> 
-        </div>
+    <div class="logo-wrapper">
+      <img src="https://www.eduopinions.com/wp-content/uploads/2018/03/Chandigarh-University-CU-logo-350x556.jpg" alt="CU Logo" class="cu-logo" />
+    </div>
+
+<!-- Dark Mode Toggle -->
+<div class="dark-mode-toggle">
+  <i class="fas fa-moon"></i>
+  <label class="switch">
+    <input type="checkbox" id="dark-toggle">
+    <span class="slider round"></span>
+  </label>
+  
+</div>
+    
+    <h1>CU SGPA Calculator</h1>
+    <form id="sgpa-form">
+      <div id="subjects-container"></div>
+      <div class="btns">
+        <button type="button" id="add-subject" data-tooltip="Add a new subject to calculate SGPA">
+          <i class="fas fa-plus"></i> Add Subject
+        </button>
+        <button type="submit" id="calculate" data-tooltip="Calculate your SGPA based on inputs">
+          <i class="fas fa-equals"></i> Calculate SGPA
+        </button>
       </div>
-      <button type="button" id="add-subject">Add Subject</button>
-      <button type="submit" id="calc-cgpa">Calculate CGPA</button>
+      <div id="cheer-message" style="font-size: 1.2rem; color: #00e0ff; margin-top: 15px;">
+      </div>
+
     </form>
-    <h2 id="result"></h2>
-    <p>&copy; All rights reserved. Anurag, <span id="currentYear">2024</span></p>
+    <div id="result">
+      <!-- Add this in your result display section -->
+<div id="result-container">
+  <span id="result" class="animated-sgpa"></span>
+</div>
+  
+    </div>
+    <p class="footer">Made with ❤️ by Anurag | <span id="year"></span></p>
   </div>
 
-  <div class="love-message">
-    Made with love by Anurag❤️
+  <div id="spinner" class="spinner-overlay">
+    <div class="neon-spinner"></div>
   </div>
-  <script src="app.js"></script> 
+  <button class="dark-mode-toggle">
+    <i class="fas fa-moon"></i> <!-- Moon Icon -->
+    <i class="fas fa-sun"></i> <!-- Sun Icon -->
+  </button>
+  
+  <script src="script.js"></script>
 </body>
 </html>
