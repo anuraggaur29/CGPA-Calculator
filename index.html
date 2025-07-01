@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGPA Calculator</title>
+  <meta name="description" content="Simple, fast, and accessible SGPA Calculator.">
+  <meta name="theme-color" content="#007bff">
+  <meta name="robots" content="index, follow">
+  <style>
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 2rem 1.5rem;
+      max-width: 350px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: 500;
+      color: #1a1a1a; /* darker label for contrast */
+    }
+    .dark-mode label {
+      color: #fff !important;
+    }
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #222;
+      background: #fff;
+    }
+    .dark-mode input[type="number"], .dark-mode input[type="text"] {
+      color: #fff;
+      background: #23272b;
+    }
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background: #0056b3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    button:hover, button:focus {
+      background: #003366;
+    }
+    .result {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      color: #17692a; /* much darker green for better contrast */
+    }
+    .dark-mode .result {
+      color: #7fff9f !important; /* lighter green for dark bg */
+    }
+    .legend-table {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .legend-table th, .legend-table td, .summary-table th, .summary-table td {
+      border: 1px solid #ccc;
+      padding: 0.3rem 0.5rem;
+      text-align: center;
+      color: #222;
+      background: #fff;
+    }
+    .dark-mode .legend-table th, .dark-mode .legend-table td,
+    .dark-mode .summary-table th, .dark-mode .summary-table td {
+      color: #fff !important;
+      background: #23272b !important;
+    }
+    .input-error {
+      border-color: #dc3545 !important;
+      background: #fff0f0;
+    }
+    .summary-table {
+      width: 100%;
+      margin-top: 1rem;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .dark-mode {
+      background: #181a1b !important;
+      color: #f1f1f1 !important;
+    }
+    .dark-mode main {
+      background: rgba(35,39,43,0.92) !important;
+      color: #f1f1f1 !important;
+    }
+    .dark-mode input, .dark-mode select {
+      background: #23272b !important;
+      color: #f1f1f1 !important;
+      border-color: #444 !important;
+    }
+    /* Improved color contrast for dark mode */
+    .dark-mode .result { color: #4be37a !important; }
+    .dark-mode label { color: #f1f1f1 !important; }
+    .dark-mode input[type="text"]::placeholder, .dark-mode input[type="number"]::placeholder {
+      color: #bbb !important;
+    }
+    a.skip-link {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translateY(-120%);
+      width: auto;
+      height: auto;
+      overflow: hidden;
+      z-index: 1000;
+      background: #007bff;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    a.skip-link:focus {
+      transform: translateY(0);
+      outline: 2px solid #222;
+      left: 0;
+      top: 0;
+    }
+    @media (max-width: 500px) {
+      .legend-table, .summary-table { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <video id="bg-video" autoplay loop muted playsinline
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;object-position:bottom;z-index:-1;pointer-events:none;transition:opacity 1s;opacity:1;">
+    <source src="/1943483-uhd_3840_2160_25fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video id="bg-video-1" autoplay loop muted playsinline
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;object-position:bottom;z-index:-1;pointer-events:none;transition:opacity 1s;opacity:0;">
+    <source src="/5818973-uhd_3840_2160_24fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <main id="main-content" role="main">
+    <h1>SGPA Calculator</h1>
+    <button type="button" class="toggle-btn" id="toggle-dark">Toggle Dark Mode</button>
+    <table class="legend-table" aria-label="Grade Mapping">
+      <thead><tr><th>Grade</th><th>A+</th><th>A</th><th>B+</th><th>B</th><th>C+</th><th>C</th><th>D</th></tr></thead>
+      <tbody><tr><td>Point</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td></tr></tbody>
+    </table>
+    <form id="sgpa-form" autocomplete="off">
+      <label for="subjects">Number of Subjects</label>
+      <input type="number" id="subjects" name="subjects" min="1" max="15" value="3" required aria-required="true">
+      <div id="grades-container"></div>
+      <button type="submit">Calculate SGPA</button>
+      <button type="button" id="reset-btn">Reset</button>
+      <button type="button" id="print-btn">Print/Export</button>
+    </form>
+    <div class="result" id="result" aria-live="polite"></div>
+    <div id="summary"></div>
+  </main>
+  <footer id="footer-credit" style="position:fixed;top:16px;right:18px;z-index:1001;background:rgba(255,255,255,0.85);padding:0.5rem 1.2rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-size:1rem;color:#007bff;font-weight:bold;letter-spacing:0.5px;user-select:none;">
+    Made by <span id="anurag-blink" style="color:#e63946;">Anurag</span>
+  </footer>
+  <script>
+    const form = document.getElementById('sgpa-form');
+    const gradesContainer = document.getElementById('grades-container');
+    const resultDiv = document.getElementById('result');
+    const subjectsInput = document.getElementById('subjects');
+
+    function createGradeInputs(count) {
+      gradesContainer.innerHTML = '';
+      for (let i = 1; i <= count; i++) {
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.gap = '0.5rem';
+        row.style.alignItems = 'center';
+        row.style.marginBottom = '0.5rem';
+
+        const labelCourse = document.createElement('label');
+        labelCourse.textContent = `Course Name`;
+        labelCourse.setAttribute('for', `course${i}`);
+        labelCourse.style.flex = '1.2';
+        const inputCourse = document.createElement('input');
+        inputCourse.type = 'text';
+        inputCourse.id = `course${i}`;
+        inputCourse.name = `course${i}`;
+        inputCourse.placeholder = `Course Name`;
+        inputCourse.style.flex = '2';
+        inputCourse.setAttribute('aria-label', `Course Name for Subject ${i}`);
+        inputCourse.setAttribute('autocomplete', 'off');
+
+        const labelGrade = document.createElement('label');
+        labelGrade.textContent = `Grade`;
+        labelGrade.setAttribute('for', `grade${i}`);
+        labelGrade.style.flex = '1';
+        const selectGrade = document.createElement('select');
+        selectGrade.id = `grade${i}`;
+        selectGrade.name = `grade${i}`;
+        selectGrade.required = true;
+        selectGrade.style.flex = '1';
+        selectGrade.setAttribute('aria-label', `Grade for Subject ${i}`);
+        selectGrade.setAttribute('autocomplete', 'off');
+        const gradeOptions = [
+          { label: 'A+', value: '10' },
+          { label: 'A', value: '9' },
+          { label: 'B+', value: '8' },
+          { label: 'B', value: '7' },
+          { label: 'C+', value: '6' },
+          { label: 'C', value: '5' },
+          { label: 'D', value: '4' }
+        ];
+        gradeOptions.forEach(opt => {
+          const option = document.createElement('option');
+          option.value = opt.value;
+          option.textContent = opt.label;
+          selectGrade.appendChild(option);
+        });
+
+        const labelCredit = document.createElement('label');
+        labelCredit.textContent = `Credit Hours`;
+        labelCredit.setAttribute('for', `credit${i}`);
+        labelCredit.style.flex = '1';
+        const inputCredit = document.createElement('input');
+        inputCredit.type = 'number';
+        inputCredit.id = `credit${i}`;
+        inputCredit.name = `credit${i}`;
+        inputCredit.min = '1';
+        inputCredit.max = '10';
+        inputCredit.required = true;
+        inputCredit.style.flex = '1';
+        inputCredit.placeholder = '1-10';
+        inputCredit.setAttribute('aria-label', `Credit Hours for Subject ${i}`);
+        inputCredit.setAttribute('autocomplete', 'off');
+
+        row.appendChild(labelCourse);
+        row.appendChild(inputCourse);
+        row.appendChild(labelGrade);
+        row.appendChild(selectGrade);
+        row.appendChild(labelCredit);
+        row.appendChild(inputCredit);
+        gradesContainer.appendChild(row);
+      }
+    }
+
+    subjectsInput.addEventListener('input', (e) => {
+      let count = parseInt(e.target.value, 10);
+      if (isNaN(count) || count < 1) count = 1;
+      if (count > 12) count = 12;
+      createGradeInputs(count);
+    });
+
+    function showSummary(count) {
+      let html = '<table class="summary-table"><thead><tr><th>Subject</th><th>Course Name</th><th>Grade</th><th>Point</th><th>Credit</th><th>Grade × Credit</th></tr></thead><tbody>';
+      for (let i = 1; i <= count; i++) {
+        const courseName = document.getElementById(`course${i}`).value || '-';
+        const gradeSel = document.getElementById(`grade${i}`);
+        const gradeLabel = gradeSel.options[gradeSel.selectedIndex].text;
+        const gradeVal = gradeSel.value;
+        const creditVal = document.getElementById(`credit${i}`).value;
+        const prod = (parseFloat(gradeVal) * parseFloat(creditVal)).toFixed(2);
+        html += `<tr><td>${i}</td><td>${courseName}</td><td>${gradeLabel}</td><td>${gradeVal}</td><td>${creditVal}</td><td>${prod}</td></tr>`;
+      }
+      html += '</tbody></table>';
+      document.getElementById('summary').innerHTML = html;
+    }
+
+    function validateInputs(count) {
+      let valid = true;
+      for (let i = 1; i <= count; i++) {
+        const gradeSel = document.getElementById(`grade${i}`);
+        const creditInput = document.getElementById(`credit${i}`);
+        gradeSel.classList.remove('input-error');
+        creditInput.classList.remove('input-error');
+        const gradeVal = parseFloat(gradeSel.value);
+        const creditVal = parseFloat(creditInput.value);
+        if (
+          isNaN(gradeVal) || gradeVal < 4 || gradeVal > 10
+        ) {
+          gradeSel.classList.add('input-error');
+          valid = false;
+        }
+        if (
+          isNaN(creditVal) || creditVal < 1 || creditVal > 10
+        ) {
+          creditInput.classList.add('input-error');
+          valid = false;
+        }
+      }
+      return valid;
+    }
+
+    function animateResult(sgpa) {
+      let current = 0;
+      const target = parseFloat(sgpa);
+      const step = target / 30;
+      resultDiv.textContent = 'Your SGPA is: 0.00';
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          resultDiv.textContent = `Your SGPA is: ${sgpa}`;
+          clearInterval(interval);
+        } else {
+          resultDiv.textContent = `Your SGPA is: ${current.toFixed(2)}`;
+        }
+      }, 20);
+    }
+
+    function saveData(count) {
+      const data = { count };
+      for (let i = 1; i <= count; i++) {
+        data[`course${i}`] = document.getElementById(`course${i}`).value;
+        data[`grade${i}`] = document.getElementById(`grade${i}`).value;
+        data[`credit${i}`] = document.getElementById(`credit${i}`).value;
+      }
+      localStorage.setItem('sgpaData', JSON.stringify(data));
+    }
+    function loadData() {
+      const data = JSON.parse(localStorage.getItem('sgpaData'));
+      if (!data) return;
+      subjectsInput.value = data.count;
+      createGradeInputs(data.count);
+      for (let i = 1; i <= data.count; i++) {
+        document.getElementById(`course${i}`).value = data[`course${i}`] || '';
+        document.getElementById(`grade${i}`).value = data[`grade${i}`];
+        document.getElementById(`credit${i}`).value = data[`credit${i}`];
+      }
+    }
+
+    document.getElementById('toggle-dark').onclick = function() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+    document.getElementById('reset-btn').onclick = function() {
+      subjectsInput.value = 3; // Reset to default value
+      createGradeInputs(3); // Reset to default number of subjects
+      document.getElementById('result').textContent = '';
+      document.getElementById('summary').innerHTML = '';
+      localStorage.removeItem('sgpaData');
+    };
+    document.getElementById('print-btn').onclick = function() {
+      window.print();
+    };
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const count = parseInt(subjectsInput.value, 10);
+      if (!validateInputs(count)) {
+        resultDiv.textContent = 'Please correct highlighted fields.';
+        return;
+      }
+      let totalWeighted = 0;
+      let totalCredits = 0;
+      for (let i = 1; i <= count; i++) {
+        const gradeVal = parseFloat(document.getElementById(`grade${i}`).value);
+        const creditVal = parseFloat(document.getElementById(`credit${i}`).value);
+        totalWeighted += gradeVal * creditVal;
+        totalCredits += parseFloat(creditVal);
+      }
+      if (totalCredits === 0) {
+        resultDiv.textContent = 'Total credit hours cannot be zero.';
+        return;
+      }
+      const sgpa = (totalWeighted / totalCredits).toFixed(2);
+      animateResult(sgpa);
+      showSummary(count);
+      saveData(count);
+    });
+
+    // Alternate background videos every 10 seconds
+    const bg1 = document.getElementById('bg-video');
+    const bg2 = document.getElementById('bg-video-1');
+    let showingFirst = true;
+    setInterval(() => {
+      if (showingFirst) {
+        bg1.style.opacity = '0';
+        bg2.style.opacity = '1';
+      } else {
+        bg1.style.opacity = '1';
+        bg2.style.opacity = '0';
+      }
+      showingFirst = !showingFirst;
+    }, 10000);
+
+    // Initialize with default or saved data
+    if (localStorage.getItem('sgpaData')) {
+      loadData();
+      showSummary(parseInt(subjectsInput.value, 10));
+    } else {
+      createGradeInputs(subjectsInput.value);
+    }
+    // Blinking animation for 'Anurag' in the credit
+    (function blinkAnurag() {
+      const el = document.getElementById('anurag-blink');
+      let on = true;
+      setInterval(() => {
+        el.style.opacity = on ? '1' : '0.15';
+        el.style.textShadow = on ? '0 0 8px #ffb703, 0 0 16px #fb5607' : 'none';
+        on = !on;
+      }, 350);
+    })();
+  </script>
+</body>
+</html>
